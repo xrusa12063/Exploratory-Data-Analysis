@@ -1,0 +1,10 @@
+powerdata <- read.table("C:/Users/User/Desktop/household_power_consumption.txt", stringsAsFactors = FALSE, header = TRUE, sep =";"  )
+subsetdata <- subset(powerdata, Date == "1/2/2007" | Date =="2/2/2007")
+globalActivePower <- as.numeric(subsetdata$Global_active_power)
+Sys.getlocale("LC_TIME")
+datetime <- strptime(paste(subsetdata$Date, subsetdata$Time, sep=" "), "%d/%m/%Y %H:%M:%S")
+##datetime<- factor(datetime,levels = c(Πεμ,Παρ,Σαβ),labels = c("Thu", "Fri", "Sat"))
+png("plot2.png", width=480, height=480)
+plot(datetime, globalActivePower, type="l", xlab="", ylab="Global Active Power (kilowatts)")
+dev.off()
+# days are greeks
